@@ -1,0 +1,3 @@
+ps -ef |grep python
+nohup python3 -u app.py > test.log 2>&1 &
+kill + 号码
