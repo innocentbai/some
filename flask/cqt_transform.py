@@ -3,15 +3,6 @@
 ## General Imports
 import numpy as np
 
-## Visualization
-#import seaborn
-#import matplotlib.pyplot as plt
-#import IPython.display as ipd
-#from ipywidgets import interactive_output #http://ipywidgets.readthedocs.io/en/latest/index.html
-#from ipywidgets import IntSlider, FloatSlider, fixed, Checkbox
-#from ipywidgets import VBox, Label
-
-
 ## Audio Imports
 import librosa, librosa.display           #https://librosa.github.io/librosa/index.html
 from music21.tempo import MetronomeMark   #http://web.mit.edu/music21/
@@ -21,10 +12,10 @@ from music21.note import Note, Rest
 # Parameters
 ## Signal Processing 
 fs = 44100                               # Sampling Frequency
-nfft = 2048                              # length of the FFT window
+nfft = 2048                            # length of the FFT window
 overlap = 0.5                            # Hop overlap percentage
 hop_length = int(nfft*(1-overlap))       # Number of samples between successive frames
-n_bins = 72                             # Number of frequency bins
+n_bins = 84                            # Number of frequency bins
 mag_exp = 2                              # Magnitude Exponent
 pre_post_max = 4                         # Pre- and post- samples for peak picking
 cqt_threshold = -75                      # Threshold for CQT dB levels, all values below threshold are set to -120 dB
@@ -65,29 +56,40 @@ def time_to_beat(duration, tempo):
 
 # Remap input to 0-1 for Sine Amplitude or to 0-127 for MIDI
 def remap(x, in_min, in_max, out_min, out_max):
-    #return np.log(x-in_min)*out_max/np.log(in_max-in_min)+out_min
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+    return np.log(x-in_min)*out_max/np.log(in_max-in_min)+out_min
+    #return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
-# Generate Sinewave, MIDI Notes and music21 notes
-def generate_sine_midi_note(f0_info, sr, n_duration, round_to_sixtenth=True):
+
+def generate_midi_note(f0_info, sr, n_duration, round_to_sixtenth=True):
     f0=f0_info[0]
     duration = librosa.frames_to_time(n_duration, sr=fs, hop_length=hop_length)
     #Generate Midi Note and music21 note
+    note_duration = 0.03*np.around(duration/2/0.03) # Round to 2 decimal places for music21 compatibility
     midi_duration = time_to_beat(duration, tempo)
     midi_velocity=int(round(remap(f0_info[1], CdB.min(), CdB.max(), 0, 127)))
     if round_to_sixtenth:
         midi_duration=round(midi_duration*16)/16
     if f0==None:
         midi_note=None
+        try:
+            note_info=Rest(type=mm.secondsToDuration(note_duration).type)
+        except:
+            note_info=Rest(type='2048th')
         f0=0
     else:
         midi_note=round(librosa.hz_to_midi(f0))
+        try:
+            note = Note(librosa.midi_to_note(midi_note).replace('♯','#'), type=mm.secondsToDuration(note_duration).type)
+        except:
+            note = Note(librosa.midi_to_note(midi_note).replace('♯','#'), type='2048th')
+        note.volume.velocity = midi_velocity
+        note_info = [note]
     midi_info = [midi_note, midi_duration, midi_velocity]
-    return midi_info
+    return [ midi_info, note_info]
 
 #Estimate Pitch
 def estimate_pitch(segment, threshold):
-    freqs = librosa.cqt_frequencies(n_bins=n_bins, fmin=librosa.note_to_hz('C1'),
+    freqs = librosa.cqt_frequencies(n_bins=n_bins, fmin=librosa.note_to_hz('A0'),
                             bins_per_octave=12)
     if segment.max()<threshold:
         return [None, np.mean((np.amax(segment,axis=0)))]
@@ -96,13 +98,19 @@ def estimate_pitch(segment, threshold):
     return [freqs[f0], np.mean((np.amax(segment,axis=0)))]
 
 # Generate notes from Pitch estimation
-def estimate_pitch_and_notes(x, onset_boundaries, i, sr):
+def estimate_pitch_and_notes_v1(x, onset_boundaries, i, sr):
     n0 = onset_boundaries[i]
     n1 = onset_boundaries[i+1]
     f0_info = estimate_pitch(np.mean(x[:,n0:n1],axis=1),threshold=cqt_threshold)
-    return generate_sine_midi_note(f0_info, sr, n1-n0)
+    return generate_midi_note(f0_info, sr, n1-n0)
 
-def cqt_trans(filename,duration):
+def estimate_pitch_and_notes_v2(x, onset_boundaries, i, sr):
+    n0 = onset_boundaries[i]
+    n1 = onset_boundaries[i+1]
+    f0_info = estimate_pitch(np.max(x[:,n0:n1],axis=1),threshold=cqt_threshold)
+    return generate_midi_note(f0_info, sr, n1-n0)
+
+def cqt_trans_v1(filename,duration):
     #load music from wav file
     x, fs = librosa.load(filename, sr=None, mono=True,duration=duration)
     global CdB
@@ -118,10 +126,32 @@ def cqt_trans(filename,duration):
     tempo=int(2*round(tempo/2))
     global mm
     mm = MetronomeMark(referent='quarter', number=tempo)
-    # Array of music information - Sinewave, MIDI Notes and muisc21 Notes
     notes=[]
     for i in range(len(onsets[1])-1):
-        notes.append(estimate_pitch_and_notes(CdB, onsets[1], i, sr=fs))
+        notes.append(estimate_pitch_and_notes_v1(CdB, onsets[1], i, sr=fs))
     music_info=np.array(notes,dtype=object)
-    #music_info = np.array([estimate_pitch_and_notes(CdB, onsets[1], i, sr=fs) for i in range(len(onsets[1])-1)]);
-    return music_info,tempo
+    midi_info=music_info[:,0]
+    return midi_info,tempo
+
+def cqt_trans_v2(filename,duration):
+    #load music from wav file
+    x, fs = librosa.load(filename, sr=None, mono=True,duration=duration)
+    print(fs)
+    global CdB
+    CdB = calc_cqt(x,fs,hop_length, n_bins, mag_exp)
+    new_cqt=cqt_thresholded(CdB,cqt_threshold)
+    global onsets
+    onsets=calc_onset(new_cqt,pre_post_max, False)
+    # Estimate Tempo
+    global tempo
+    tempo, beats=librosa.beat.beat_track(y=None, sr=fs, onset_envelope=onsets[2], hop_length=hop_length,
+               units='frames',tightness=80)
+    tempo=int(2*round(tempo/2))
+    global mm
+    mm = MetronomeMark(referent='quarter', number=tempo)
+    notes=[]
+    for i in range(len(onsets[1])-1):
+        notes.append(estimate_pitch_and_notes_v1(CdB, onsets[1], i, sr=fs))
+    music_info=np.array(notes,dtype=object)
+    note_info=music_info[:,1]
+    return note_info,mm
