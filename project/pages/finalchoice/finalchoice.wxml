@@ -1,0 +1,19 @@
+<!--pages/finalchoice/finalchoice.wxml-->
+<view class="title_line" >
+转化成功！
+</view>
+<view class="choice1">
+  <button bindtap="goto_listsen">
+  <span>试听</span>
+  <view class="liquid"></view>
+</button>
+</view>
+<view class="choice2">
+  <button bindtap="getpdf">
+  <span>预览</span>
+  <view class="liquid"></view>
+</button>
+</view>
+<view class="bg"  style="opacity:{{0.05}}">
+    <image class="bg-image" mode="scaleToFill"></image>
+  </view>

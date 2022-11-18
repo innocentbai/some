@@ -1,0 +1,154 @@
+/* pages/piano1/piano1.wxss */
+.title_line
+{
+    font-size: 30px;
+    text-align: center;
+}
+
+
+.bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:url('https://cdn.pixabay.com/photo/2018/05/21/14/46/autumn-3418440__480.png') 
+    no-repeat #000;
+    background-size:cover;
+    z-index:-1;
+    }
+    
+    .bg-img{
+        width : 100%;
+        height : 100%;
+    }
+
+    .view_fengexian {
+        width: 96%;
+        height: 50rpx;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 0rpx 2% 0rpx 2%;
+      }
+      
+      /* 两个view的样式 */
+      .view_fengexian view {
+        width: 33%;
+        height: 2rpx;
+        background: linear-gradient(to right, #ead6ee, #a0f1ea);
+      }
+      
+      /* 字体的样式 */
+      .text_fengexian {
+        font-size: 25rpx;
+        color: rgb(105, 105, 105);
+        margin: 0rpx 2% 0rpx 2%;
+      }
+      
+      body {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #f1f1f1;
+    
+    }
+    
+    .loader {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: linear-gradient(#f07e6e, #84cdfa, #5ad1cd);
+        animation: animate 1.2s linear infinite;
+        /* left: 65px;
+        top: 150px; */
+        right:20px;
+    }
+    
+    @keyframes animate {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    
+
+    
+    /* .outline:nth-child(1) {
+        filter: blur(100px);
+    } */
+    
+    /* .outline:nth-child(2) {
+        filter: blur(10px);
+    } */
+    
+    /* .outline:nth-child(3) {
+        filter: blur(25px);
+    } */
+    
+    /* .outline:nth-child(4) {
+        filter: blur(50px);
+    } */
+ 
+      
+    /* .text {
+        font-size: 20px;
+        font-weight: 700;
+        color: #aaa;
+        text-align: center;
+        text-shadow: 1px 1px 1px #fff;
+      } */
+    .loader:after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        background: repeating-radial-gradient(circle at 50% 50%, rgba(200,200,200,.2) 0%, rgba(200,200,200,.2) 2%, transparent 2%, transparent 3%, rgba(200,200,200,.2) 3%, transparent 3%), conic-gradient(white 0%, silver 10%, white 35%, silver 45%, white 60%, silver 70%, white 80%, silver 95%, white 100%);
+        border: solid white 10px;
+        border-radius: 50%;
+    }
+    /* .wrap {
+        text-align: center;
+        margin: 20px 0;
+        position: relative;
+        top: 3px;
+        left :73px;
+      } */
+      
+      .btn {
+        top:150px;
+        text-align: center;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        /* border-color: rgba(0, 0,0, 0); */
+        /* background: repeating-radial-gradient(circle at 50% 50%, rgba(200,200,200,.2) 0%, rgba(200,200,200,.2) 2%, transparent 2%, transparent 3%, rgba(200,200,200,.2) 3%, transparent 3%), conic-gradient(white 0%, silver 10%, white 35%, silver 45%, white 60%, silver 70%, white 80%, silver 95%, white 100%);
+        border-radius: 50%;
+        box-shadow: 0 0px 20px #0005, 0 -0px 20px #fff2;
+        outline: 1px solid #fff;
+        outline-offset: -2px;
+        transition: 1s; */
+        /* top: 10px ; */
+      }
+      
+      /* .text {
+        font-size: 20px;
+        font-weight: 700;
+        color: #aaa;
+        text-align: center;
+        text-shadow: 1px 1px 1px #fff;
+      } */
+      
+      .btn:hover {
+        background:rgb(243, 243, 243);
+      }

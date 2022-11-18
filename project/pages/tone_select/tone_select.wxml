@@ -1,0 +1,121 @@
+<!--pages/tone_select/tone_select.wxml-->
+  <view class="title">音色选择 </view>
+  <view class="search">
+    <input type="text" placeholder="输入你想选择的乐器" />
+</view>
+
+  <!-- 选择乐器-->
+<view class="til">热门乐器选取</view>
+<view class="view_fengexian">
+<view ></view>
+<text class="text_fengexian">*点击乐器图片上传*</text>
+<view ></view>
+</view>
+
+
+  <div class="card">
+    <div class="card_load">
+        <image src="https://cdn.pixabay.com/photo/2019/11/07/13/42/musical-instrument-4608912__480.jpg" class="img"bindtap="violin"></image>
+    </div>
+    <div class="card_load_extreme_title">小提琴</div>
+    <div class="card_load_extreme_descripion">
+      <!-- 播放按钮 -->
+      <image src="https://img-blog.csdnimg.cn/590caa88b72040f8a4ab5cfb9572fb52.png"  wx:if="{{!violin_isplay}}" bindtap="violin_audioPlay"></image>
+      <!-- 停止按钮 -->
+       <image src="https://img-blog.csdnimg.cn/878915a0da78434bbba94b713556cbd5.png"   wx:else bindtap="violin_audioPause"></image>
+    </div>
+</div>
+
+<div class="card2">
+    <div class="card_load2">
+        <image src="https://cdn.pixabay.com/photo/2017/04/04/20/40/instrument-2203044_1280.jpg" class="img"bindtap="piano"></image>
+    </div>
+    <div class="card_load_extreme_title">钢琴</div>
+    <div class="card_load_extreme_descripion">
+    <!-- 播放按钮 -->
+    <image src="https://img-blog.csdnimg.cn/590caa88b72040f8a4ab5cfb9572fb52.png"  wx:if="{{!piano_isplay}}" bindtap="piano_audioPlay"></image>
+      <!-- 停止按钮 -->
+       <image src="https://img-blog.csdnimg.cn/878915a0da78434bbba94b713556cbd5.png"   wx:else bindtap="piano_audioPause"></image>
+    </div>
+</div>
+
+<div class="card3">
+    <div class="card_load3">
+        <image src="https://cdn.pixabay.com/photo/2015/02/18/20/23/harmonica-641425_1280.jpg" class="img"bindtap="harmonica"></image>
+    </div>
+    <div class="card_load_extreme_title">口琴</div>
+    <div class="card_load_extreme_descripion">
+    <!-- 播放按钮 -->
+    <image src="https://img-blog.csdnimg.cn/590caa88b72040f8a4ab5cfb9572fb52.png"  wx:if="{{!harmonica_isplay}}" bindtap="harmonica_audioPlay"></image>
+      <!-- 停止按钮 -->
+       <image src="https://img-blog.csdnimg.cn/878915a0da78434bbba94b713556cbd5.png"   wx:else bindtap="harmonica_audioPause"></image>
+    </div>
+</div>
+
+
+<div class="card4">
+    <div class="card_load4">
+        <image src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg3.doubanio.com%2Fview%2Fgroup_topic%2Flarge%2Fpublic%2Fp113867902.jpg&refer=http%3A%2F%2Fimg3.doubanio.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668928881&t=54f7b3ea90b08eb476856c6dcdc84dd0" class="img"bindtap="guitar"></image>
+    </div>
+    <div class="card_load_extreme_title">吉他</div>
+    <div class="card_load_extreme_descripion">
+    <!-- 播放按钮 -->
+    <image src="https://img-blog.csdnimg.cn/590caa88b72040f8a4ab5cfb9572fb52.png"  wx:if="{{!guitar_isplay}}" bindtap="guitar_audioPlay"></image>
+      <!-- 停止按钮 -->
+       <image src="https://img-blog.csdnimg.cn/878915a0da78434bbba94b713556cbd5.png"   wx:else bindtap="guitar_audioPause"></image>
+    </div>
+</div>
+
+
+<div class="card5">
+    <div class="card_load5">
+        <image src="https://cdn.pixabay.com/photo/2017/11/07/00/22/guitar-2925282__480.jpg" class="img"bindtap="electricguitar"></image>
+    </div>
+    <div class="card_load_extreme_title">电吉他</div>
+    <div class="card_load_extreme_descripion">
+     <!-- 播放按钮 -->
+     <image src="https://img-blog.csdnimg.cn/590caa88b72040f8a4ab5cfb9572fb52.png"  wx:if="{{!electricguitar_isplay}}" bindtap="electricguitar_audioPlay"></image>
+      <!-- 停止按钮 -->
+       <image src="https://img-blog.csdnimg.cn/878915a0da78434bbba94b713556cbd5.png"   wx:else bindtap="electricguitar_audioPause"></image>
+    </div>
+</div>
+
+<div class="card6">
+    <div class="card_load6">
+        <image src="https://cdn.pixabay.com/photo/2011/08/03/01/53/trumpet-player-8455__480.jpg" class="img"bindtap="trumpet"></image>
+    </div>
+    <div class="card_load_extreme_title">小号</div>
+    <div class="card_load_extreme_descripion">
+     <!-- 播放按钮 -->
+     <image src="https://img-blog.csdnimg.cn/590caa88b72040f8a4ab5cfb9572fb52.png"  wx:if="{{!trumpet_isplay}}" bindtap="trumpet_audioPlay"></image>
+      <!-- 停止按钮 -->
+       <image src="https://img-blog.csdnimg.cn/878915a0da78434bbba94b713556cbd5.png"   wx:else bindtap="trumpet_audioPause"></image>
+    </div>
+</div>
+
+<div class="card7">
+    <div class="card_load7">
+        <image src="https://cdn.pixabay.com/photo/2018/01/18/12/39/music-3090204__480.jpg" class="img"bindtap="flute"></image>
+    </div>
+    <div class="card_load_extreme_title">长笛</div>
+    <div class="card_load_extreme_descripion">
+     <!-- 播放按钮 -->
+     <image src="https://img-blog.csdnimg.cn/590caa88b72040f8a4ab5cfb9572fb52.png"  wx:if="{{!flute_isplay}}" bindtap="flute_audioPlay"></image>
+      <!-- 停止按钮 -->
+       <image src="https://img-blog.csdnimg.cn/878915a0da78434bbba94b713556cbd5.png"   wx:else bindtap="flute_audioPause"></image>
+    </div>
+</div>
+
+<div class="card8">
+    <div class="card_load8">
+        <image src="https://cdn.pixabay.com/photo/2019/03/27/14/49/sax-4085168__480.jpg" class="img"bindtap="saxophone"></image>
+    </div>
+    <div class="card_load_extreme_title">萨克斯</div>
+    <div class="card_load_extreme_descripion">
+     <!-- 播放按钮 -->
+     <image src="https://img-blog.csdnimg.cn/590caa88b72040f8a4ab5cfb9572fb52.png"  wx:if="{{!saxophone_isplay}}" bindtap="saxophone_audioPlay"></image>
+      <!-- 停止按钮 -->
+       <image src="https://img-blog.csdnimg.cn/878915a0da78434bbba94b713556cbd5.png"   wx:else bindtap="saxophone_audioPause"></image>
+    </div>
+</div>
+

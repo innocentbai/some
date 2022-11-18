@@ -1,0 +1,23 @@
+{
+  "pages":[
+    "pages/list/list",
+    "pages/upload/upload",
+    
+    "pages/tone_select/tone_select",
+    
+    
+    "pages/finalchoice/finalchoice",
+    "pages/listen/listen"
+  
+    
+    
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "music score translator",
+    "navigationBarTextStyle":"black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

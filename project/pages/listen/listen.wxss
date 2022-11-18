@@ -1,0 +1,138 @@
+.title_line {
+    margin-top: 100px;
+      text-align: center;
+  }
+  
+  .title_line span {
+    position: absolute;
+    color: #fff;
+    transform: translate(-50%, -50%);
+    font-size: 38px;
+    letter-spacing: 5px;
+  }
+  
+  .title_line span:nth-child(1) {
+    color: transparent;
+    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+  }
+  
+  .title_line span:nth-child(2) {
+    color: rgb(98, 118, 230);
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    animation: uiverse723 3s ease-in-out infinite;
+  }
+  
+  @keyframes uiverse723 {
+    0%, 100% {
+      clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 
+       54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+    }
+  
+    50% {
+      clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 
+       51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+    }
+  }
+.preview
+{
+    position: absolute;
+    top:330px;
+    left: 60px;
+}
+
+.music {
+    position: absolute;
+    top: 200px;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40rpx 20rpx;
+  }
+  .music image {
+    width: 100rpx;
+    height: 100rpx;
+  }
+  .music slider {
+    width: 450rpx;
+  }
+  .music .time {
+    width: 50rpx;
+    font-size: small;
+    color: #93c4db;
+  }
+.but
+{
+    position: absolute;
+    top:400px;
+    left: 60px;
+}
+.bg{ 
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:url('https://cdn.pixabay.com/photo/2018/05/21/14/46/autumn-3418440__480.png') 
+    no-repeat #000;
+    background-size:cover;
+    z-index:-1;
+    }
+    
+    .bg-img{
+        width : 100%;
+        height : 100%;
+    }
+    button {
+        border: none;
+        display: block;
+        position: relative;
+        padding: 0.7em 2.4em;
+        font-size: 18px;
+        background: transparent;
+        cursor: pointer;
+        user-select: none;
+        overflow: hidden;
+        color: royalblue;
+        z-index: 1;
+        font-family: inherit;
+        font-weight: 500;
+       }
+       
+       button span {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        z-index: -1;
+        border: 4px solid royalblue;
+       }
+       
+       button span::before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 8%;
+        height: 500%;
+        background: var(--lightgray);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-60deg);
+        transition: all 0.3s;
+       }
+       
+       button:hover span::before {
+        transform: translate(-50%, -50%) rotate(-90deg);
+        width: 100%;
+        background: royalblue;
+       }
+       
+       button:hover {
+        color: white;
+       }
+       
+       button:active span::before {
+        background: #2751cd;
+       }

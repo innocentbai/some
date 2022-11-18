@@ -1,0 +1,27 @@
+<view class="title_line">
+<span>audition</span>
+    <span>audition</span>
+</view>
+
+
+<view class="music">
+  <!-- 播放按钮 -->
+  <image src="https://img-blog.csdnimg.cn/590caa88b72040f8a4ab5cfb9572fb52.png" wx:if="{{!isPlay}}" bindtap="audioPlay"></image>
+  <!-- 停止按钮 -->
+  <image src="https://img-blog.csdnimg.cn/878915a0da78434bbba94b713556cbd5.png" wx:else bindtap="audioPause"></image>
+  <slider step="1" value="{{currentTime}}" bindchange="bindchange" bindchanging="bindchanging" max="{{duration}}" backgroundColor="#efefef" activeColor="#90BED5" />
+</view>
+<view class="preview">
+<button bindtap="getpdf">
+预览乐谱
+<span></span>
+</button>
+</view>
+<view class="but">
+<button bindtap="goback">返回主界面
+<span></span>
+</button>
+</view>
+<view class="bg"  style="opacity:{{0.05}}">
+    <image class="bg-image" mode="scaleToFill"></image>
+  </view>

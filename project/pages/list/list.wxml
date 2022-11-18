@@ -1,0 +1,33 @@
+<!--pages/list/list.wxml-->
+
+
+<view>
+  <swiper interval="1000" indicator-dots="true" autoplay="true" circular="true">
+    <swiper-item>
+      <image mode="widthFix" src="https://cdn.pixabay.com/photo/2016/11/23/00/58/record-player-1851576__480.jpg"></image>
+    </swiper-item>
+    <swiper-item class="cri"> 
+      <image mode="widthFix" src="https://cdn.pixabay.com/photo/2016/03/16/23/55/flea-market-1262036__480.jpg"></image>
+    </swiper-item>
+      <swiper-item>
+        <image mode="widthFix" src="https://cdn.pixabay.com/photo/2018/01/16/10/18/headphones-3085681__480.jpg"></image>
+      </swiper-item>
+  </swiper>
+</view>
+<view class="bg"  style="opacity:{{0.05}}">
+    <image class="bg-image" mode="scaleToFill"></image>
+  </view>
+  <view class="button1">
+  <button bindtap="goclassic">
+  <span>classic</span>
+  <view class="liquid"></view>
+</button>
+</view>
+<view class="button2">
+<button bindtap="handleShowModal">
+<span>AI</span>
+<view class ="liquid"></view>
+</button>
+</view>
+
+
